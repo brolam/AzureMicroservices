@@ -6,6 +6,7 @@ using AutoMapper;
 using ECommerce.Api.Products.Db;
 using ECommerce.Api.Products.Interfaces;
 using ECommerce.Api.Products.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace ECommerce.Api.Products.Providers
@@ -35,9 +36,23 @@ namespace ECommerce.Api.Products.Providers
                 dbContext.SaveChanges();
             }
         }
-        public Task<(bool IsSuccess, IEnumerable<Models.Product> Product, string ErrorMessage)> GetProductsAsync()
+        public async Task<(bool IsSuccess, IEnumerable<Models.Product> Products, string ErrorMessage)> GetProductsAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var products = await dbContext.Products.ToListAsync();
+                if ((products != null) && products.Any())
+                {
+                    var result = mapper.Map<IEnumerable<Db.Product>, IEnumerable<Models.Product>>(products);
+                    return (true, result, null);
+                } 
+                return (false, null, "Not found");
+            }
+            catch (System.Exception exception)
+            {
+                logger.LogError(exception.ToString());
+                return (false, null, exception.Message);
+            }
         }
     }
 }
