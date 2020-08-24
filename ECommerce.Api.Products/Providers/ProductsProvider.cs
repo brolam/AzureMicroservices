@@ -45,7 +45,26 @@ namespace ECommerce.Api.Products.Providers
                 {
                     var result = mapper.Map<IEnumerable<Db.Product>, IEnumerable<Models.Product>>(products);
                     return (true, result, null);
-                } 
+                }
+                return (false, null, "Not found");
+            }
+            catch (System.Exception exception)
+            {
+                logger.LogError(exception.ToString());
+                return (false, null, exception.Message);
+            }
+        }
+
+        public async Task<(bool IsSuccess, Models.Product Product, string ErrorMessage)> GetProductAsync(int id)
+        {
+            try
+            {
+                var product = await dbContext.Products.FindAsync(id);
+                if (product != null)
+                {
+                    var result = mapper.Map<Db.Product, Models.Product>(product);
+                    return (true, result, null);
+                }
                 return (false, null, "Not found");
             }
             catch (System.Exception exception)
