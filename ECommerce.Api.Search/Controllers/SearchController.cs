@@ -20,7 +20,7 @@ namespace ECommerce.Api.Search.Controllers
         public async Task<IActionResult> SearchAsync(SearchTerm trem)
         {
             var result = await searchService.SearchAsync(trem.CustomerId);
-            if ( result.Issucess){
+            if ( result.IsSuccess){
                 return Ok(result.SearchResults);
             }
             return NotFound();

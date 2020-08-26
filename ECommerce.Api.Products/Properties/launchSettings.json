@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/products",
-      "applicationUrl": "https://localhost:51800;http://localhost:51801",
+      "applicationUrl": "http://localhost:51801",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
