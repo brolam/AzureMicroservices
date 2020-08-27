@@ -20,14 +20,15 @@ namespace ECommerce.Api.Search.Services
             if (ordersResult.IsSuccess)
             {
                 var productsResult = await productsService.GetProductsAsync();
-                if (productsResult.IsSuccess)
+                foreach (var order in ordersResult.Orders)
                 {
-                    foreach (var order in ordersResult.Orders)
+                    foreach (var item in order.Items)
                     {
-                        foreach (var item in order.Items)
-                        {
-                            item.ProductName = productsResult.Products.FirstOrDefault(product => product.Id.Equals(item.ProductId))?.Name;
-                        }
+                        item.ProductName = productsResult.IsSuccess
+                        ?
+                        productsResult.Products.FirstOrDefault(product => product.Id.Equals(item.ProductId))?.Name
+                        :
+                        "Product informations is not avalible";
                     }
                 }
                 return (true, ordersResult.Orders);

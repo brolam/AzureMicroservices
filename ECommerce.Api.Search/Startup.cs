@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Polly;
 
 namespace ECommerce.Api.Search
 {
@@ -33,7 +34,7 @@ namespace ECommerce.Api.Search
             {
                 config.BaseAddress = new Uri(Configuration["Services:Products"]);
 
-            });
+            }).AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(5 , _ => TimeSpan.FromMilliseconds(500)));
             services.AddControllers();
         }
 
@@ -45,7 +46,7 @@ namespace ECommerce.Api.Search
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
