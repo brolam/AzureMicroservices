@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:18072",
-      "sslPort": 18072
+      "applicationUrl": "http://localhost:58323",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -21,10 +21,16 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
-      "applicationUrl": "http://localhost:18072",
+      "applicationUrl": "http://localhost:58323",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/customers",
+      "publishAllPorts": true
     }
   }
 }

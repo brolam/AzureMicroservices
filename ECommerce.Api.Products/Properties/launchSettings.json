@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51800",
-      "sslPort": 51800
+      "applicationUrl": "http://localhost:60319",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -21,10 +21,16 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/products",
-      "applicationUrl": "http://localhost:51801",
+      "applicationUrl": "http://localhost:60319",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/products",
+      "publishAllPorts": true
     }
   }
 }
