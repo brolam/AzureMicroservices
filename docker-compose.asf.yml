@@ -26,9 +26,9 @@ services:
     image: brenomar/ecommerceapisearch:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - Services__Products=http://10.0.0.4:19081/lil/products
-      - Services__Customers=http://10.0.0.4:19081/lil/customers
-      - Services__Orders=http://10.0.0.4:19081/lil/orders
+      - Services__Products=http://products.lil
+      - Services__Customers=http://customers.lil
+      - Services__Orders=http://orders.lil
     ports:
       - "6004:80"
 
